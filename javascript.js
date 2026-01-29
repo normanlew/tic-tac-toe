@@ -25,3 +25,64 @@ function getHumanChoice() {
 
 let humanScore = 0;
 let computerScore = 0;
+
+// Play a single round
+function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toLowerCase();
+    computerChoice = computerChoice.toLowerCase();
+
+    if (humanChoice === "rock") {
+        if (computerChoice === "paper") {
+            computerScore++;
+            console.log("You lose!  Paper beats Rock");
+        }
+        else if (computerChoice === "scissors") {
+            console.log("You win!  Rock beats Scissors!");
+            humanScore++;
+        }
+        else {
+            humanScore + .5;
+            computerScore + .5;
+            console.log("It's a tie!")
+        }
+    }
+
+    if (humanChoice === "paper") {
+        if (computerChoice === "scissors") {
+            computerScore++;
+            console.log("You lose!  Scissors beats Paper");
+        }
+        else if (computerChoice === "rock") {
+            console.log("You win!  Paper beats Rock!");
+            humanScore++;
+        }
+        else {
+            humanScore + .5;
+            computerScore + .5;
+            console.log("It's a tie!")
+        }
+    }
+
+    if (humanChoice === "scissors") {
+        if (computerChoice === "rock") {
+            computerScore++;
+            console.log("You lose!  Rock beats Scissors");
+        }
+        else if (computerChoice === "paper") {
+            console.log("You win!  Scissors beats Paper!");
+            humanScore++;
+        }
+        else {
+            humanScore + .5;
+            computerScore + .5;
+            console.log("It's a tie!")
+        }
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+console.log("Computer chooses: " + computerSelection)
+
+playRound(humanSelection, computerSelection);
+console.log("Human: " + humanScore + ", Computer: " + computerScore);
