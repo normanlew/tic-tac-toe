@@ -80,9 +80,23 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-console.log("Computer chooses: " + computerSelection)
 
-playRound(humanSelection, computerSelection);
-console.log("Human: " + humanScore + ", Computer: " + computerScore);
+
+
+
+
+// Play the game 5 times
+function playGame() {
+    let numberOfGames = 5;
+
+    while (numberOfGames > 0) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        console.log("Computer chooses: " + computerSelection)
+        playRound(humanSelection, computerSelection);
+        console.log("Human: " + humanScore + ", Computer: " + computerScore);
+        numberOfGames--;
+    }
+}
+
+playGame();
