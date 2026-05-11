@@ -18,7 +18,8 @@ const gameBoard = (() => {
     }
 
     const placeSymbol = (symbol, space) => {
-        if (boardIsFull || gameIsWon || space < 0 || space > 8 || board[space] === "undefined") {
+        symbol = symbol.toUpperCase();
+        if (boardIsFull || gameIsWon || space < 0 || space > 8 || board[space] !== undefined || size > 9) {
             return false;
         }
 
@@ -40,14 +41,14 @@ const gameBoard = (() => {
                 
             // }
             if (
-                (board[0] === symbol && board[1] === symbol || board[2] === symbol) ||
-                (board[3] === symbol && board[4] === symbol || board[5] === symbol) ||
-                (board[6] === symbol && board[7] === symbol || board[8] === symbol) ||
-                (board[0] === symbol && board[3] === symbol || board[6] === symbol) ||
-                (board[1] === symbol && board[4] === symbol || board[7] === symbol) ||
-                (board[2] === symbol && board[5] === symbol || board[8] === symbol) ||
-                (board[0] === symbol && board[4] === symbol || board[8] === symbol) ||
-                (board[2] === symbol && board[4] === symbol || board[6] === symbol) 
+                (board[0] === symbol && board[1] === symbol && board[2] === symbol) ||
+                (board[3] === symbol && board[4] === symbol && board[5] === symbol) ||
+                (board[6] === symbol && board[7] === symbol && board[8] === symbol) ||
+                (board[0] === symbol && board[3] === symbol && board[6] === symbol) ||
+                (board[1] === symbol && board[4] === symbol && board[7] === symbol) ||
+                (board[2] === symbol && board[5] === symbol && board[8] === symbol) ||
+                (board[0] === symbol && board[4] === symbol && board[8] === symbol) ||
+                (board[2] === symbol && board[4] === symbol && board[6] === symbol) 
             ) {
                 gameIsWon = true;
                 winner = symbol;
