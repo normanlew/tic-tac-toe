@@ -61,4 +61,6 @@ const gameBoard = (() => {
         }
     }
 
+    return {getBoardIsFull, getGameIsWon, getWinner, placeSymbol};
+
 })();
