@@ -26,20 +26,11 @@ const gameBoard = (() => {
         else {
             board[space] = symbol;
             size++;
+            console.log(size);
             if (size === 9) {
                 boardIsFull = true;
             }
 
-            // if (space === 0) {
-            //     if ( (array[1] === symbol && array[2] === symbol) ||
-            //             (array[3] === symbol && array[6] === symbol) ||
-            //             (array[4] === symbol && array[8] === symbol)
-            // ) {
-            //         setWinner(symbol);
-            // }
-
-                
-            // }
             if (
                 (board[0] === symbol && board[1] === symbol && board[2] === symbol) ||
                 (board[3] === symbol && board[4] === symbol && board[5] === symbol) ||
@@ -54,14 +45,24 @@ const gameBoard = (() => {
                 winner = symbol;
             }
 
-            size++;
-            if (size === 9) {
-                boardIsFull = true;
-            }
             return true;
         }
     }
 
     return {getBoardIsFull, getGameIsWon, getWinner, placeSymbol};
+
+})();
+
+function createPlayer(name, symbol) {
+    const getName = () => name;
+    const getSymbol = () => symbol;
+
+    return {getName, getSymbol};
+}
+
+const gameControl = ((player1, player2, gameBoard) => {
+    player1Turn = true;
+
+    
 
 })();
