@@ -41,6 +41,14 @@ body {
     align-items: center;
 }
 
+#zero, #one, #three, #four, #six, #seven {
+    border-right: solid black 4px;
+}
+
+#zero, #one, #two, #three, #four, #five {
+    border-bottom: solid black 4px;
+}
+
 .announcements {
     background-color: darkgoldenrod
 }
