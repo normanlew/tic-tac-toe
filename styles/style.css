@@ -8,7 +8,6 @@ html,
 body {
     height: 100vh;
     width: 100vw;
-    /* font-family: "Roboto" ; */
 }
 
 
@@ -38,9 +37,7 @@ body {
 .square {
     display: flex;
     justify-content: center;
-    align-items: center;;
-    /* height: 100%;
-    width: 100%; */
+    align-items: center;
 }
 
 #zero, #one, #three, #four, #six, #seven {

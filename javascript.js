@@ -64,8 +64,6 @@ function createGameControl(player1, player2, gameBoard) {
 
     let player1Turn = Math.random() > 0.5;
 
-    // const squares = document.querySelectorAll(".square")
-
     const putSymbolOnBoard = ((element) => {
         let player;
         let symbol;
@@ -117,10 +115,13 @@ function createGameControl(player1, player2, gameBoard) {
 
 };
 
-const mary = createPlayer("Mary");
-const reuben = createPlayer("Reuben");
+let player1Name = prompt("Hi Player One, what is your name? ")
+let player2Name = prompt("Hi Player Two, what is your name? ")
 
-const game = createGameControl(mary, reuben, gameBoard);
+const player1 = createPlayer(player1Name);
+const player2 = createPlayer(player2Name);
+
+const game = createGameControl(player1, player2, gameBoard);
 
 const squares = document.querySelectorAll(".square")
 
