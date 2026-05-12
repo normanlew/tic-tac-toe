@@ -71,44 +71,45 @@ function createGameControl(player1, player2, gameBoard) {
         let symbol;
         let spaceNumber = dict[element.id];
 
-        if (player1Turn) {
-            symbol = "X";
-        }
-        else {
-            symbol = "O";
-        }
-
-        if (!gameBoard.placeSymbol(symbol, spaceNumber)) {
-            console.log("try another space");
-        } else {
-
+        if (!gameBoard.getBoardIsFull() && !gameBoard.getGameIsWon()) {
             if (player1Turn) {
-                element.innerHTML=`
-                <svg height="140" width="140" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="20" y1="20" x2="120" y2="120" style="stroke:blue;stroke-width:12" />
-                    <line x1="20" y1="120" x2="120" y2="20" style="stroke:blue;stroke-width:12" />
-                    </svg>`
-                player1Turn = false;
+                symbol = "X";
             }
             else {
-                element.innerHTML=`
-                    <svg height="140" width="140" xmlns="http://www.w3.org/2000/svg">
-                    <circle class="svg-circle" cx="70" cy="70" r="60" fill="red"/>
-                    </svg>`
-                player1Turn = true;
+                symbol = "O";
             }
-        }
 
-        if (gameBoard.getGameIsWon()) {
-            if ("X" === gameBoard.getWinner()) {
-                console.log(`${player1.getName()} wins!`)
+            if (!gameBoard.placeSymbol(symbol, spaceNumber)) {
+                console.log("try another space");
+            } else {
+
+                if (player1Turn) {
+                    element.innerHTML=`
+                    <svg height="140" width="140" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="20" y1="20" x2="120" y2="120" style="stroke:blue;stroke-width:12" />
+                        <line x1="20" y1="120" x2="120" y2="20" style="stroke:blue;stroke-width:12" />
+                        </svg>`
+                    player1Turn = false;
+                }
+                else {
+                    element.innerHTML=`
+                        <svg height="140" width="140" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="svg-circle" cx="70" cy="70" r="60" fill="red"/>
+                        </svg>`
+                    player1Turn = true;
+                }
+                if (gameBoard.getGameIsWon()) {
+                    if ("X" === gameBoard.getWinner()) {
+                        console.log(`${player1.getName()} wins!`)
+                    }
+                    else {
+                        console.log(`${player2.getName()} wins!`)
+                    }
+                }
+                else if (gameBoard.getBoardIsFull()) {
+                    console.log("The board is full and nobody won.")
+                }
             }
-            else {
-                console.log(`${player2.getName()} wins!`)
-            }
-        }
-        else if (gameBoard.getBoardIsFull()) {
-            console.log("The board is full and nobody won.")
         }
     });
 
