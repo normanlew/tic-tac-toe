@@ -64,10 +64,20 @@ function createGameControl(player1, player2, gameBoard) {
 
     let player1Turn = Math.random() > 0.5;
 
+    let announce = document.querySelector(".game-announcements")
+
+    if (player1Turn) {
+        announce.innerHTML = `<p>${player1.getName()}, your move</p>`;
+    }
+    else {
+        announce.innerHTML = `<p>${player2.getName()}, your move</p>`;
+    }
+
     const putSymbolOnBoard = ((element) => {
         let player;
         let symbol;
         let spaceNumber = dict[element.id];
+        
 
         if (!gameBoard.getBoardIsFull() && !gameBoard.getGameIsWon()) {
             if (player1Turn) {
@@ -96,6 +106,7 @@ function createGameControl(player1, player2, gameBoard) {
                         </svg>`
                     player1Turn = true;
                 }
+
                 if (gameBoard.getGameIsWon()) {
                     if ("X" === gameBoard.getWinner()) {
                         console.log(`${player1.getName()} wins!`)
@@ -115,18 +126,28 @@ function createGameControl(player1, player2, gameBoard) {
 
 };
 
-let player1Name = prompt("Hi Player One, what is your name? ")
-let player2Name = prompt("Hi Player Two, what is your name? ")
+const start_button = document.querySelector("#new-game");
 
-const player1 = createPlayer(player1Name);
-const player2 = createPlayer(player2Name);
+start_button.addEventListener("click", (e) => {
+    startGame();
+});
 
-const game = createGameControl(player1, player2, gameBoard);
+function startGame() {
+    const squares = document.querySelectorAll(".square")
 
-const squares = document.querySelectorAll(".square")
-
-squares.forEach((element) => {
-    element.addEventListener(("click"), () => {
-        game.putSymbolOnBoard(element);
+    squares.forEach((element) => {
+        element.innerHTML = "";
+        element.addEventListener(("click"), () => {
+            game.putSymbolOnBoard(element);
+        })
     })
-})
+
+    let player1Name = prompt("Hi Player One, what is your name? ")
+    let player2Name = prompt("Hi Player Two, what is your name? ")
+
+    const player1 = createPlayer(player1Name);
+    const player2 = createPlayer(player2Name);
+
+    const game = createGameControl(player1, player2, gameBoard);
+}
+

@@ -50,4 +50,33 @@ body {
 
 .announcements {
     background-color: darkgoldenrod;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-reset {
+    flex-grow: 1;
+    background-color: gray;
+    border-right: solid black 2px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#new-game {
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+    padding: 5px;
+}
+
+.game-announcements {
+    flex-grow: 4;
+    background-color: orange;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
