@@ -27,7 +27,7 @@ body {
 }
 
 .game-board {
-    background-color: brown;
+    background-color: yellow;
     height: 450;
     width: 450;
     display: grid;
