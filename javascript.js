@@ -52,12 +52,12 @@ const gameBoard = (() => {
 
 })();
 
-function createPlayer(name, symbol) {
-    symbol = symbol.toUpperCase();
+function createPlayer(name) {
+    // symbol = symbol.toUpperCase();
     const getName = () => name;
-    const getSymbol = () => symbol;
+    // const getSymbol = () => symbol;
 
-    return {getName, getSymbol};
+    return {getName};
 }
 
 function createGameControl(player1, player2, gameBoard) {
@@ -70,16 +70,17 @@ function createGameControl(player1, player2, gameBoard) {
 
     const putSymbolOnBoard = ((element) => {
         let player;
+        let symbol;
         let spaceNumber = dict[element.id];
 
         if (player1Turn) {
-            player = player1;
+            symbol = "X";
         }
         else {
-            player = player2;
+            symbol = "Y";
         }
 
-        if (!gameBoard.placeSymbol(player.getSymbol(), spaceNumber)) {
+        if (!gameBoard.placeSymbol(symbol, spaceNumber)) {
             console.log("try another space");
         } else {
             if (player1Turn) {
@@ -91,7 +92,7 @@ function createGameControl(player1, player2, gameBoard) {
         }
 
         if (gameBoard.getGameIsWon()) {
-            if (player1.getSymbol() === gameBoard.getWinner()) {
+            if ("X" === gameBoard.getWinner()) {
                 console.log(`${player1.getName()} wins!`)
             }
             else {
@@ -147,8 +148,8 @@ function createGameControl(player1, player2, gameBoard) {
 
 };
 
-const mary = createPlayer("Mary", "X");
-const reuben = createPlayer("Reuben", "Y");
+const mary = createPlayer("Mary");
+const reuben = createPlayer("Reuben");
 
 const game = createGameControl(mary, reuben, gameBoard);
 
