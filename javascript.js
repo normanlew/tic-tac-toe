@@ -62,6 +62,8 @@ function createPlayer(name, symbol) {
 
 function createGameControl(player1, player2, gameBoard) {
     let player1Turn = Math.random() > 0.5;
+
+    const squares = document.querySelectorAll(".square")
     const playGame = (() => {
         do {
             let player;
@@ -87,8 +89,8 @@ function createGameControl(player1, player2, gameBoard) {
             }
         } while (!gameBoard.getBoardIsFull() && !gameBoard.getGameIsWon());
         
-        console.log(gameBoard.getBoardIsFull());
-        console.log(gameBoard.getGameIsWon());
+        // console.log(gameBoard.getBoardIsFull());
+        // console.log(gameBoard.getGameIsWon());
         if (gameBoard.getGameIsWon()) {
             if (player1.getSymbol() === gameBoard.getWinner()) {
                 console.log(`${player1.getName()} wins!`)
