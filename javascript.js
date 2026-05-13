@@ -1,9 +1,19 @@
+let first_game = true;
+
 const gameBoard = (() => {
     const board = new Array(9);
-    size = 0;
+    let size = 0;
     let boardIsFull = false;
     let gameIsWon = false;
     let winner = undefined;
+
+    const resetBoard = () => {
+        board.fill(undefined);
+        size = 0;
+        boardIsFull = false;
+        gameIsWon = false;
+        winner = undefined;
+    };
 
     const getBoardIsFull = () => {
         return boardIsFull;
@@ -48,7 +58,7 @@ const gameBoard = (() => {
         }
     }
 
-    return {getBoardIsFull, getGameIsWon, getWinner, placeSymbol};
+    return {resetBoard, getBoardIsFull, getGameIsWon, getWinner, placeSymbol};
 
 })();
 
@@ -59,6 +69,7 @@ function createPlayer(name) {
 }
 
 function createGameControl(player1, player2, gameBoard) {
+    gameBoard.resetBoard();
     const dict = {"zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
                     "six": 6, "seven": 7, "eight": 8};
 
@@ -74,12 +85,14 @@ function createGameControl(player1, player2, gameBoard) {
     }
 
     const putSymbolOnBoard = ((element) => {
+        console.log("in putSymbolOnBoard function");
         let player;
         let symbol;
         let spaceNumber = dict[element.id];
         
 
         if (!gameBoard.getBoardIsFull() && !gameBoard.getGameIsWon()) {
+            console.log("game is playable");
             if (player1Turn) {
                 symbol = "X";
             }
@@ -92,6 +105,7 @@ function createGameControl(player1, player2, gameBoard) {
             } else {
 
                 if (player1Turn) {
+                    console.log("player 1 places X");
                     element.innerHTML=`
                     <svg height="140" width="140" xmlns="http://www.w3.org/2000/svg">
                         <line x1="20" y1="20" x2="120" y2="120" style="stroke:blue;stroke-width:12" />
@@ -100,6 +114,7 @@ function createGameControl(player1, player2, gameBoard) {
                     player1Turn = false;
                 }
                 else {
+                    console.log("player 2 places Y");
                     element.innerHTML=`
                         <svg height="140" width="140" xmlns="http://www.w3.org/2000/svg">
                         <circle class="svg-circle" cx="70" cy="70" r="60" fill="red"/>
@@ -109,14 +124,23 @@ function createGameControl(player1, player2, gameBoard) {
 
                 if (gameBoard.getGameIsWon()) {
                     if ("X" === gameBoard.getWinner()) {
-                        console.log(`${player1.getName()} wins!`)
+                        // console.log(`${player1.getName()} wins!`)
+                        announce.innerHTML = `<p>${player1.getName()} wins!</p>`;
                     }
                     else {
-                        console.log(`${player2.getName()} wins!`)
+                        announce.innerHTML = `<p>${player2.getName()} wins!</p>`;
                     }
                 }
                 else if (gameBoard.getBoardIsFull()) {
                     console.log("The board is full and nobody won.")
+                }
+                else {
+                    if (player1Turn) {
+                        announce.innerHTML = `<p>${player1.getName()}, your move</p>`;
+                    }
+                    else {
+                        announce.innerHTML = `<p>${player2.getName()}, your move</p>`;
+                    }
                 }
             }
         }
@@ -133,14 +157,6 @@ start_button.addEventListener("click", (e) => {
 });
 
 function startGame() {
-    const squares = document.querySelectorAll(".square")
-
-    squares.forEach((element) => {
-        element.innerHTML = "";
-        element.addEventListener(("click"), () => {
-            game.putSymbolOnBoard(element);
-        })
-    })
 
     let player1Name = prompt("Hi Player One, what is your name? ")
     let player2Name = prompt("Hi Player Two, what is your name? ")
@@ -149,5 +165,18 @@ function startGame() {
     const player2 = createPlayer(player2Name);
 
     const game = createGameControl(player1, player2, gameBoard);
+
+    const squares = document.querySelectorAll(".square")
+
+    squares.forEach((element) => {
+        element.innerHTML = "";
+        if (first_game) {
+            element.addEventListener(("click"), () => {
+                console.log("click");
+                game.putSymbolOnBoard(element);
+            })
+        }
+    })
+    first_game = false;
 }
 
