@@ -76,7 +76,7 @@ function createGameControl(player1, player2, gameBoard) {
     let announce = document.querySelector(".game-announcements")
 
     if (player1Turn) {
-        announce.innerHTML = `<p>${player1.getName()}, your move</p>`;
+        announce.innerHTML = `<p >${player1.getName()}, your move</p>`;
     }
     else {
         announce.innerHTML = `<p>${player2.getName()}, your move</p>`;

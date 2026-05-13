@@ -50,13 +50,12 @@ body {
 
 .announcements {
     background-color: darkgoldenrod;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 2fr 5fr;;
 }
 
 .game-reset {
-    flex-grow: 1;
+    flex-grow: 0;
     background-color: gray;
     border-right: solid black 2px;
     height: 100%;
@@ -73,7 +72,7 @@ body {
 }
 
 .game-announcements {
-    flex-grow: 4;
+    flex-grow: 0;
     background-color: orange;
     height: 100%;
     display: flex;
