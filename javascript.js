@@ -1,5 +1,3 @@
-let first_game = true;
-
 const gameBoard = (() => {
     const board = new Array(9);
     let size = 0;
@@ -85,14 +83,12 @@ function createGameControl(player1, player2, gameBoard) {
     }
 
     const putSymbolOnBoard = ((element) => {
-        console.log("in putSymbolOnBoard function");
         let player;
         let symbol;
         let spaceNumber = dict[element.id];
         
 
         if (!gameBoard.getBoardIsFull() && !gameBoard.getGameIsWon()) {
-            console.log("game is playable");
             if (player1Turn) {
                 symbol = "X";
             }
@@ -101,11 +97,9 @@ function createGameControl(player1, player2, gameBoard) {
             }
 
             if (!gameBoard.placeSymbol(symbol, spaceNumber)) {
-                console.log("try another space");
             } else {
 
                 if (player1Turn) {
-                    console.log("player 1 places X");
                     element.innerHTML=`
                     <svg height="140" width="140" xmlns="http://www.w3.org/2000/svg">
                         <line x1="20" y1="20" x2="120" y2="120" style="stroke:blue;stroke-width:12" />
@@ -114,7 +108,6 @@ function createGameControl(player1, player2, gameBoard) {
                     player1Turn = false;
                 }
                 else {
-                    console.log("player 2 places Y");
                     element.innerHTML=`
                         <svg height="140" width="140" xmlns="http://www.w3.org/2000/svg">
                         <circle class="svg-circle" cx="70" cy="70" r="60" fill="red"/>
@@ -124,7 +117,6 @@ function createGameControl(player1, player2, gameBoard) {
 
                 if (gameBoard.getGameIsWon()) {
                     if ("X" === gameBoard.getWinner()) {
-                        // console.log(`${player1.getName()} wins!`)
                         announce.innerHTML = `<p>${player1.getName()} wins!</p>`;
                     }
                     else {
@@ -132,14 +124,14 @@ function createGameControl(player1, player2, gameBoard) {
                     }
                 }
                 else if (gameBoard.getBoardIsFull()) {
-                    console.log("The board is full and nobody won.")
+                    announce.innerHTML = `<p>The board is full and no one won.</p>`;
                 }
                 else {
                     if (player1Turn) {
-                        announce.innerHTML = `<p>${player1.getName()}, your move</p>`;
+                        announce.innerHTML = `<p>${player1.getName()}, your move.</p>`;
                     }
                     else {
-                        announce.innerHTML = `<p>${player2.getName()}, your move</p>`;
+                        announce.innerHTML = `<p>${player2.getName()}, your move.</p>`;
                     }
                 }
             }
@@ -170,13 +162,15 @@ function startGame() {
 
     squares.forEach((element) => {
         element.innerHTML = "";
-        if (first_game) {
-            element.addEventListener(("click"), () => {
-                console.log("click");
-                game.putSymbolOnBoard(element);
-            })
-        }
+        const newElement = element.cloneNode(true);
+
+        element.replaceWith(newElement);
+        newElement.addEventListener(("click"), (event) => {
+            game.putSymbolOnBoard(newElement);
+        });
     })
-    first_game = false;
+
+
 }
+
 
